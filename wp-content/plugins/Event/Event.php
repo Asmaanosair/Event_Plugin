@@ -85,7 +85,7 @@ defined('ABSPATH') or die("Hi there!  I'm just a plugin, not much I can do when 
          $start_date=date("Y-m-d", strtotime($start));
          $end_date=date("Y-m-d", strtotime($end));
 
-            echo "  <label> Start:</label><br>
+                 echo " <label>". _e('Start Date',"Localhost") . ":</label><br>
            <input type=\"date\" name=\"start\" value='$start_date'>  $start_date <br>  ";
          echo "  <label> End:</label><br>
            <input type=\"date\" name=\"end\" value='$end_date'>  $end_date <br>   ";
@@ -135,7 +135,13 @@ if($query->have_posts()) {
         if ( $url ) {
             $imag= esc_url( $url );
         }
-        echo "<div class='col-lg-4'><img src='".$imag."'>"."<h4>" . get_the_title() . "</h4>" . "<p>" . get_the_excerpt() . "</p>"  . "<h6> Start Date  :"."   ".get_post_meta(get_the_ID(),'start_date',true)."</h6>". "<a href='" . get_the_permalink() . "' class='btn btn-primary' style='margin: 5px;'> More</a></div>";
+      echo "<div class='col-lg-4'><img src='".$imag."'><h4>"
+            . get_the_title() . "</h4><p>" . get_the_excerpt() . "</p><h6> " ;
+            _e('Start Date',"Localhost") ;
+
+            echo  "  : " .get_post_meta(get_the_ID(),'start_date',true)."</h6><a href='" . get_the_permalink() . "' class='btn btn-primary' style='margin: 5px;'> ";
+            _e('More','Localhost');
+            echo "</a></div>";
            endwhile;
 }else{
     $result = "<p> There is no Events</p>";
@@ -145,19 +151,12 @@ if($query->have_posts()) {
 
 }
 
-     /********************
+      /********************
       * Translation
       * ******************
       */
-     function trans() {
-        $test=array(
-            __('Start_Date','Localhost'),
-            __('End_Date','Localhost'),
-
-        );
-     }
-     function rad_plugin_load_text_domain() {
-         load_plugin_textdomain( 'Localhost', dirname( plugin_basename( __FILE__ ) ) . '/language/' );
+     function mtphr_post_duplicator_localization() {
+         load_plugin_textdomain( 'post-duplicator', false, 'Event/language/' );
      }
 
 
@@ -179,7 +178,7 @@ if($query->have_posts()) {
          add_action( 'add_meta_boxes',array($this,'add_meta_box_data'), 10, 1);
          add_action("save_post", array($this,'save_data_metabox'), 10, 2);
          add_shortcode('block', array($this,'wp_shortcode'));
-         add_action( 'plugins_loaded',array($this,'rad_plugin_load_text_domain') );
+         add_action( 'plugins_loaded',array($this,'mtphr_post_duplicator_localization') );
          add_action('enqueue_block_editor_assets', array($this,'loadMyBlock'));
      }
 
