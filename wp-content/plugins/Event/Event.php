@@ -157,7 +157,7 @@ if($query->have_posts()) {
         );
      }
      function rad_plugin_load_text_domain() {
-         load_plugin_textdomain( 'Localhost', dirname( plugin_basename( __FILE__ ) ) . '/wp-content/plugins/Event/language' );
+         load_plugin_textdomain( 'Localhost', dirname( plugin_basename( __FILE__ ) ) . '/language/' );
      }
 
 
@@ -195,9 +195,7 @@ add_shortcode('block', 'ink_wp_shortcode');
  if(class_exists('AddPostPlugin')){
      $AddPostPlugin=new AddPostPlugin();
      $AddPostPlugin->register();
-     /* Translators: %d is the number of rad points added */
-
-     printf( esc_html__( 'End_Date', 'Localhost' ), $count );
+    
 
 
 
