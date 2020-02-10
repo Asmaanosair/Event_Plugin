@@ -156,7 +156,7 @@ if($query->have_posts()) {
       * ******************
       */
      function mtphr_post_duplicator_localization() {
-         load_plugin_textdomain( 'post-duplicator', false, 'Event/language/' );
+         load_plugin_textdomain( 'post-duplicator', false, 'Event/' );
      }
 
 
